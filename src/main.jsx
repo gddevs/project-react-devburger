@@ -2,12 +2,11 @@ import React from 'react';
 import ReactDOM from 'react-dom/client';
 
 import { Login } from './containers/Login';
-import globalStyles from './styles/globalStyles';
+import GlobalStyles from './styles/globalStyles'
 
 ReactDOM.createRoot(document.getElementById('root')).render(
-  <ReactStrictMode>
+  <React.StrictMode>
     <Login />
-    // eslint-disable-next-line react/jsx-no-undef
     <GlobalStyles />
-  </ReactStrictMode>,
+  </React.StrictMode>,
 );
