@@ -1,7 +1,10 @@
 import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 import * as yup from 'yup';
+import { useNavigate } from 'react-router-dom';
+
 import { api } from '../../services/api';
+import { toast, ToastContainer } from 'react-toastify';
 
 import { Button } from '../../components/Button';
 import Logo from '../../assets/LogoMain.svg';
@@ -10,11 +13,14 @@ import {
   Form,
   InputContainer,
   LeftContainer,
+  Link,
   RightContainer,
   Title,
 } from './styles';
 
 export function Login() {
+  const navigate = useNavigate();
+
   const schema = yup
     .object({
       email: yup
@@ -23,7 +29,7 @@ export function Login() {
         .required('O email é obrigatório'),
       password: yup
         .string()
-        .min(6, 'A senha deve ter no mínimo 6 caracteres')
+        .min(8, 'A senha deve ter no mínimo 8 caracteres')
         .required('A senha é obrigatória'),
     })
     .required();
@@ -38,11 +44,29 @@ export function Login() {
 
   console.log(errors);
 
-  const onSubmit = (data) => {
-    api.post('/session', {
-      email: data.email,
-      password: data.password,
-    });
+  const onSubmit = async (data) => {
+    const {
+      data: { token },
+    } = await toast.promise(
+      api.post('/session', {
+        email: data.email,
+        password: data.password,
+      }),
+      {
+        pending: 'Verificando seus dados',
+        success: {
+          render() {
+            setTimeout(() => {
+              navigate('/');
+            }, 2000);
+            return `Seja Bem-Vindo(a)`;
+          },
+        },
+        error: 'Email ou Senha Incorretos 🤯',
+      },
+    );
+
+    localStorage.setItem('token', token);
   };
 
   return (
@@ -71,9 +95,10 @@ export function Login() {
           <Button type="submit">ENTRAR</Button>
         </Form>
         <p>
-          Não possui conta? <a>Clique aqui.</a>
+          Não possui conta? <Link to="/cadastro">Clique aqui.</Link>
         </p>
       </RightContainer>
+      <ToastContainer autoClose={2000} theme="dark" />
     </Container>
   );
 }

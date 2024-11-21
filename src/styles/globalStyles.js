@@ -1,4 +1,5 @@
 import { createGlobalStyle } from 'styled-components';
+import 'react-toastify/dist/ReactToastify.css';
 
 const globalStyles = createGlobalStyle`
   
@@ -12,5 +13,7 @@ const globalStyles = createGlobalStyle`
         cursor: pointer;
     }
 `;
+
+
 
 export default globalStyles;
