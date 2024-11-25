@@ -5,7 +5,7 @@ import Carousel from 'react-multi-carousel';
 import 'react-multi-carousel/lib/styles.css';
 
 
-export function CategoriesCarousel() {
+export function OffersCarousel() {
   const [categories, setCategories] = useState([]);
   
 

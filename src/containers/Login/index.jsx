@@ -59,7 +59,7 @@ export function Login() {
             setTimeout(() => {
               navigate('/');
             }, 2000);
-            return `Seja Bem-Vindo(a)`;
+            return 'Seja Bem-Vindo(a)';
           },
         },
         error: 'Email ou Senha Incorretos 🤯',
