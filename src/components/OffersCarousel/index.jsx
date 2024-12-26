@@ -1,28 +1,32 @@
 import { api } from '../../services/api';
 import { useEffect, useState } from 'react';
-import { Container, ContainerItems, Title } from './styles';
+import { Container, Title } from './styles';
 import Carousel from 'react-multi-carousel';
 import 'react-multi-carousel/lib/styles.css';
+import { CardProduct } from '../CardProduct';
+import { formatPrice } from '../../../utils/formatPrice';
 
 
 export function OffersCarousel() {
-  const [categories, setCategories] = useState([]);
-  
+  const [offers, setOffers] = useState([]);
 
   useEffect(() => {
-    async function loadCategories() {
-      try {
-        const { data } = await api.get('/categories');
-        setCategories(data);
-        console.log(data);
-      } catch (error) {
-        console.error('Erro ao carregar categorias:', error);
-      }
+    async function loadProducts() {
+      const { data } = await api.get('/products');
+
+      const onlyOffers = data
+      .filter((product) => product.offer)
+      .map((product) => ({
+        currencyValue: formatPrice(product.price),
+        ...product,
+      
+      }));
+      
+      setOffers(onlyOffers);
     }
-  
-    loadCategories();
+
+    loadProducts();
   }, []);
-  
 
   const responsive = {
     superLargeDesktop: {
@@ -32,7 +36,7 @@ export function OffersCarousel() {
     },
     desktop: {
       breakpoint: { max: 3000, min: 1024 },
-      items: 3,
+      items: 4,
     },
     tablet: {
       breakpoint: { max: 1024, min: 464 },
@@ -46,7 +50,7 @@ export function OffersCarousel() {
 
   return (
     <Container>
-      <Title>Categorias</Title>
+      <Title>Ofertas do Dia</Title>
 
       <Carousel
         responsive={responsive}
@@ -55,10 +59,8 @@ export function OffersCarousel() {
         partialVisible={false}
         itemClass="carousel-item"
       >
-        {categories.map((category) => (
-          <ContainerItems key={category.id} $imageUrl={category.url}>
-            <p>{category.name}</p>
-          </ContainerItems>
+        {offers.map((product) => (
+          <CardProduct key={product.id} product={product} />
         ))}
       </Carousel>
     </Container>

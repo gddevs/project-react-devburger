@@ -33,10 +33,7 @@ export const Container = styled.section`
   url(${BackgroundHome});
   background-size: cover;
   background-position: center;
-  height: 500px;
+  height: 100vh;
 
 `;
 
-export const Content = styled.div`
-
-`;
