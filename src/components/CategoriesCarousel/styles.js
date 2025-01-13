@@ -1,6 +1,5 @@
+import { Link } from "react-router-dom";
 import styled from "styled-components";
-
-
 
 export const Container = styled.div`
   .carousel-item {
@@ -9,7 +8,6 @@ export const Container = styled.div`
     
   }
   padding-left: 40px;
-
 `;
 
 export const Title = styled.h2`
@@ -33,7 +31,6 @@ export const Title = styled.h2`
     transform: translateX(-50%);
     bottom: 0;
   }
-
 `;
 
 export const ContainerItems = styled.div`
@@ -52,15 +49,22 @@ export const ContainerItems = styled.div`
   font-weight: 400;
   
   p {
-    color: #f4f4f4;
-    background-color: rgba(0, 0, 0, 0.5);
-    padding: 5px 15px;
-    margin-top: 80px;
-    border-radius: 15px;
-    font-weight: 600;
-    font-size: 20px;
-
+    
   }
+`;
 
+export const CategoryButton = styled(Link)`
+  color: #f4f4f4;
+  background-color: rgba(0, 0, 0, 0.5);
+  padding: 10px 30px;
+  margin-top: 50px;
+  border-radius: 30px;
+  font-weight: 500;
+  font-size: 22px;
+  text-decoration: none;
+
+  &:hover {
+    background-color: #9758a6;
+  }
 `;
 

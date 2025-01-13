@@ -9,7 +9,17 @@ export const Container = styled.div`
   .react-multi-carousel-list {
     overflow: visible;
   }
-  
+
+  .react-multiple-carousel__arrow--left {
+    left: 2px;
+    top: 60px;
+  }
+  .react-multiple-carousel__arrow--right {
+    right: 80px;
+    top: 60px;
+  }
+
+
   padding-left: 40px;
   padding-bottom: 30px;
 `;

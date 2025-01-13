@@ -1,6 +1,6 @@
 import { api } from '../../services/api';
 import { useEffect, useState } from 'react';
-import { Container, ContainerItems, Title } from './styles';
+import { CategoryButton, Container, ContainerItems, Title } from './styles';
 import Carousel from 'react-multi-carousel';
 import 'react-multi-carousel/lib/styles.css';
 
@@ -57,7 +57,7 @@ export function CategoriesCarousel() {
       >
         {categories.map((category) => (
           <ContainerItems key={category.id} $imageUrl={category.url}>
-            <p>{category.name}</p>
+            <CategoryButton> {category.name} </CategoryButton>
           </ContainerItems>
         ))}
       </Carousel>
