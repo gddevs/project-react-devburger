@@ -37,14 +37,14 @@ export const ContainerItems = styled.div`
   background: url(${(props) => props.$imageUrl}) no-repeat;
   background-size: cover;
   background-position: center;
-  border-radius: 20px;
+  border-radius: 30px;
 
   display: flex;
   align-items: center;
-  padding: 20px 10px;
+  padding: 20px 30px;
   margin-top: 40px;
-  width: 90%;
-  height: 250px;
+  width: 95%;
+  height: 290px;
   font-size: 18px;
   font-weight: 400;
   

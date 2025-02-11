@@ -51,6 +51,16 @@ export const Banner = styled.div`
   }  
 `;
 
+export const ButtonReturn = styled(Link)`
+  img {
+    width: 30px;
+    height: 30px;
+    position: absolute;
+    left: 20px;
+    cursor: pointer;
+  }
+`;
+
 export const CategoryMenu = styled.div`
   display: flex;
   justify-content: center;

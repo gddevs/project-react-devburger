@@ -1,23 +1,44 @@
 import { useEffect, useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router-dom';
 import {
   Container,
   Banner,
   CategoryMenu,
   ProductsContainer,
   CategoryButton,
+  ButtonReturn,
 } from './styles';
 import { api } from '../../services/api';
 import { formatPrice } from '../../../utils/formatPrice';
 import { CardProduct } from '../../components/CardProduct';
+import Seta from '../../assets/seta.svg';
 
 export function Menu() {
   const [categories, setCategories] = useState([]);
   const [products, setProducts] = useState([]);
   const [filteredProducts, setFilteredProducts] = useState([]);
-  const[activeCategory, setActiveCategory] = useState(0);
+  
 
   const navigate = useNavigate();
+
+  const { search } = useLocation();
+
+  const queryParams = new URLSearchParams(search);
+
+  
+
+  const[activeCategory, setActiveCategory] = useState(() => {
+    const categoryId = +queryParams.get('categoria');
+
+    if (categoryId) {
+      return categoryId;
+    }
+    return 0;
+    
+  });
+  const handleBack = () => {
+    navigate('/home');
+  }
 
   useEffect(() => {
     async function loadCategories() {
@@ -26,6 +47,7 @@ export function Menu() {
       const newCategories = [{ id: 0, name: 'Todas' }, ...data];
 
       setCategories(newCategories);
+      
     }
 
     async function loadProducts() {
@@ -60,12 +82,13 @@ export function Menu() {
         <h1>
           O MELHOR
           <br />
-          HAMBURGUER
+          HAMBURGER
           <br />
           ESTÁ AQUI!
           <span>Esse cardápio está irresistivel!</span>
         </h1>
       </Banner>
+      
       <CategoryMenu>
         {categories.map((category) => (
           <CategoryButton
@@ -89,7 +112,8 @@ export function Menu() {
           </CategoryButton>
         ))}
       </CategoryMenu>
-
+      <ButtonReturn onClick={handleBack}> <img src={Seta} alt="Voltar" /> 
+      </ButtonReturn>
       <ProductsContainer>
         {filteredProducts.map((product) => (
           <CardProduct key={product.id} product={product} />

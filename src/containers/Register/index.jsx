@@ -48,8 +48,6 @@ export function Register() {
     resolver: yupResolver(schema),
   });
 
-  console.log(errors);
-
   const onSubmit = async (data) => {
     try {
       const { status } = await api.post(

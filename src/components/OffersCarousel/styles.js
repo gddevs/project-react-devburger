@@ -11,14 +11,14 @@ export const Container = styled.div`
   }
 
   .react-multiple-carousel__arrow--left {
-    left: 2px;
-    top: 60px;
-  }
-  .react-multiple-carousel__arrow--right {
-    right: 80px;
-    top: 60px;
+    left: 6px;
+    top: 6px;
   }
 
+  .react-multiple-carousel__arrow--right {
+    top: 6px;
+    right: 50px;
+  }
 
   padding-left: 40px;
   padding-bottom: 30px;
